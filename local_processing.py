@@ -1,48 +1,27 @@
-
-import glob
-import os
 import pickle
-
 import numpy as np
-import tensorflow as tf
-import matplotlib.pyplot as plt
 
-paths = glob.glob('data/waymo/training_and_validation/*')
-paths.sort()
+from matplotlib.cbook import flatten
 
-cdistribution = []
-#counts[,vehicle, pedestrian, cyclist]
-counts = np.zeros((len(paths), 3))
-#Datadump for offline EDA
-data = []
+def main():
+    '''
+    In this function some additional EDA is done.
+    For easier handling this is done localy with dumped data.
+    The dumped data Contains batches of 10 recordings for each tfRecord-file.
+    '''
+    
+    #Loading the dump
+    path = 'PATH TO DUMP'
+    data = pickle.load(open(path, "rb"))
 
-for i, path in enumerate(paths):
+    #Check if there is a bbox, not within in the Picture
+    a_key = 'groundtruth_boxes'
+    values_of_key = [a_dict[a_key].numpy() for a_dict in data]
+    values_of_key = list(flatten(values_of_key))
+    #bbox coordinates are expected to be 0.0 => x <= 1.0
+    print('Maximum Value for bbox', np.max(values_of_key))
+    print('Minimum Value for bbox', np.min(values_of_key))
 
-    print('Proccesing ',path)
-    dataset = get_dataset(path)
-    dataset = dataset.shuffle(100, reshuffle_each_iteration=True)
-    batch = dataset.take(10)
-
-    for j, rec in enumerate(batch):
-        data.append(rec)
-        classes = rec['groundtruth_classes'].numpy()
-        _unique, count = np.unique(classes, return_counts=True)
-        for k in range(len(count)):
-            counts[i, k] += count[k]     
-
-labels = np.arange(0,len(counts))
-
-width = 0.8
-
-fig, ax = plt.subplots()
-
-ax.bar(labels, counts[:, 0], width, label='Vehicle')
-ax.bar(labels, counts[:, 1], width, label='Pedestrian')
-ax.bar(labels, counts[:, 2], width, label='Cyclist')
-
-ax.set_ylabel('Number of Occurences')
-ax.set_xlabel('Number for the corresponding tfRecord-file')
-ax.set_title('Occurences of Classes')
-ax.legend()
-
-plt.savefig('test.png')
+    
+if __name__ == "__main__":
+    main()
