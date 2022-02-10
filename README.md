@@ -67,4 +67,65 @@ dataset = dataset.shuffle(100, reshuffle_each_iteration=True)
 batch = dataset.take(10)
 display_instances(batch)
 ```
-As an Additional EDA task, i
+### Classdistribution analysis
+As an Additional EDA task i analysed the Classdistribution along all tfRecordfiles. I took 10 samples from each file and counted the occurrences of the different classes.
+```python
+import pickle
+
+import matplotlib.pyplot as plt
+'''
+In this Section two things are happening:
+-10 recordings are taken from each tfRecord file and the amount per class
+ per tfRecord file is calculated to get a sense for the classdistribution 
+-We dump de data -> 10*97 = 970 Images, Classes and Boxes to be able to
+ process the Data locally
+'''
+
+#counts[(vehicle, pedestrian, cyclist)]
+counts = np.zeros((len(paths), 3))
+#Paths are alphabetically sorted to keep track of which counts belong to which tfRecord
+paths.sort()
+data = []
+
+for i, path in enumerate(paths):
+
+    print('Proccesing ',path)
+    dataset = get_dataset(path)
+    dataset = dataset.shuffle(100, reshuffle_each_iteration=True)
+    batch = dataset.take(10)
+    
+    for j, rec in enumerate(batch):
+        #append recording to dump
+        data.append(rec)
+        
+        classes = rec['groundtruth_classes'].numpy()
+        unique, count = np.unique(classes, return_counts=True)
+                
+        if 1 in unique:
+            counts[i, 0] += count[np.where(unique==1)[0][0]]
+        if 2 in unique:
+            counts[i, 1] += count[np.where(unique==2)[0][0]]
+        if 4 in unique:
+            counts[i, 2] += count[np.where(unique==4)[0][0]]
+
+#Save the dump to a file
+with open("datadump", "wb") as file:
+    pickle.dump(data, file)   
+
+#Create Plot to visualize classdistribution
+labels = np.arange(0,len(counts))
+bar_width = 0.8
+fig, ax = plt.subplots()
+
+ax.bar(labels, counts[:, 0], bar_width, label='Vehicle')
+ax.bar(labels, counts[:, 1], bar_width, label='Pedestrian')
+ax.bar(labels, counts[:, 2], bar_width, label='Cyclist')
+ax.set_ylabel('Number of Occurences')
+ax.set_xlabel('Number for the corresponding tfRecord-file')
+ax.set_title('Occurences of Classes')
+ax.legend()
+
+plt.savefig('classdistribution.png')
+plt.show()
+
+```
