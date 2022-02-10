@@ -76,10 +76,6 @@ def main():
 
     plt.show()
     plt.savefig('test5.png', dpi=300)
-            
-        
-        
-    
-    print('f')       
+      
 if __name__ == "__main__":
     main()
