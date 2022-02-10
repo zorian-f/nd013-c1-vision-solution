@@ -62,7 +62,7 @@ def main():
         
     
     brightness = np.array(brightness)
-    brightness = brightness.reshape(20,10)
+    brightness = brightness.reshape(97,10)
     stats=[np.mean(brightness, axis=1),np.std(brightness, axis=1)]
 
     labels = np.arange(0,len(stats[0]))
@@ -70,13 +70,12 @@ def main():
     fig, ax = plt.subplots()
 
     ax.bar(labels, stats[0], yerr=stats[1])
-    ax.set_ylabel('Number of Occurences')
+    ax.set_ylabel('Mean RMS Brightness')
     ax.set_xlabel('Number for the corresponding tfRecord-file')
-    ax.set_title('Occurences of Classes')
     ax.legend()
 
     plt.show()
-    plt.savefig('test5.png')
+    plt.savefig('test5.png', dpi=300)
             
         
         
