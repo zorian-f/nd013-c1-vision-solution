@@ -1,9 +1,11 @@
-### Project overview
+# Object Detection in an Urban Environment
 In this First Project the Task is to train and evaluate a pretrained modle from the [TensorFlow 2 Detection Model Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md). The [Waymo Open dataset](https://waymo.com/open/) is used as a datasource.
 The Original starter code can be found at [udacity/nd013-c1-vision-starter](https://github.com/udacity/nd013-c1-vision-starter) and the original Problem instructions can be found in the [README_ORIG.md](README_ORIG.md). The modle is trained to detect vehicles, pedestrians and cyclists in an urban environment.
 
-### Exploratory Data Analysis (EDA)
+## Exploratory Data Analysis (EDA)
 In the EDA we get a better understanding of the Data we are dealing with. The Code lays in the [Exploratory Data Analysis.ipynb](https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/Exploratory%20Data%20Analysis.ipynb).
+
+### Display 10 random Images
 The first thing implented is a simple function `display_instances` which shows 10 random picked pictures off of one tfRecord file. An important note is, that in the tfRecordfiles the BBox Coordinates are noramlized and have to be multiplied with height and width.
 
 ```python
@@ -52,7 +54,7 @@ def display_instances(batch):
     plt.tight_layout()
     plt.show()
 ```
-To get an overall impression also across the different tfRecordfiles we take a random tfRecordfile and also take 10 random recordings within that tfRecord. We accomplish that by shuffling both the paths and the dataset.
+To get an overall impression also across the different tfRecordfiles we take a random tfRecordfile and also take 10 random recordings within that tfRecord. We accomplish that by shuffling both the paths and the dataset. What the output looks-like can be seen in [10_samples.png](https://github.com/zorian-f/nd013-c1-vision-solution/blob/43f6f073110518c866b4cbcb5bae566810c64ca9/visualization/10_samples.png).
 ```python
 import random
 
@@ -65,3 +67,4 @@ dataset = dataset.shuffle(100, reshuffle_each_iteration=True)
 batch = dataset.take(10)
 display_instances(batch)
 ```
+As an Additional EDA task, i
