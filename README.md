@@ -67,8 +67,15 @@ dataset = dataset.shuffle(100, reshuffle_each_iteration=True)
 batch = dataset.take(10)
 display_instances(batch)
 ```
-<div style="text-align:center"><img src="visualization/1_sample.png" /></div>
-![alt text](visualization/1_sample.png)
+<p align="center" width="80%">
+    <img width="80%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/60b8c2b007e64a51776ae15fb97663264bfde0bf/visualization/1_sample.png"> 
+</p>
+
+The Following conclusions can be drawn from a first look at the Pictures:
+
+* The pictues are resized to 640x640 and dirstored, they do not have the original aspcet Ratio. But that should not be a Problem for training.
+* Ovaerall Picuterquality is good, sharp and good Lighting.
+
 ### Classdistribution analysis
 As an Additional EDA task i analysed the Classdistribution along all tfRecordfiles. I took 10 samples from each file and counted the occurrences of the different classes. Besides calculating the 
 ```python
@@ -132,4 +139,7 @@ plt.show()
 
 ```
 The Resulting Bar Chart shows the stacked occurrences of each class within one tfRecordfile. 
-![alt text](visualization/class_distribution.png#center)
+<p align="center" width="80%">
+    <img width="80%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/1a0df4bbab02604a576920e1a94b6245d56d554e/visualization/class_distribution.png"> 
+</p>
+
