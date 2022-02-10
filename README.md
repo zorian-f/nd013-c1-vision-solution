@@ -52,3 +52,16 @@ def display_instances(batch):
     plt.tight_layout()
     plt.show()
 ```
+To get an overall impression also across the different tfRecordfiles we take a random tfRecordfile and also take 10 random recordings within that tfRecord. We accomplish that by shuffling both the paths and the dataset.
+```python
+import random
+
+#shuffling the paths so each time we get images from a different tfRecord
+random.shuffle(paths)
+dataset = get_dataset(paths[0])
+#shuffling the recordings within a tfRecordfile
+dataset = dataset.shuffle(100, reshuffle_each_iteration=True)
+#take 10 Recordings and display them
+batch = dataset.take(10)
+display_instances(batch)
+```
