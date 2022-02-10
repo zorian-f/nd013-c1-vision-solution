@@ -129,3 +129,5 @@ plt.savefig('classdistribution.png')
 plt.show()
 
 ```
+The Resulting Bar Chart shows the stacked occurrences of each class within one tfRecordfile. 
+![alt text](visualization/class_distribution.png#center)
