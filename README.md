@@ -1,12 +1,12 @@
 # Object Detection in an Urban Environment
-In this First Project the Task is to train and evaluate a pretrained modle from the [TensorFlow 2 Detection Model Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md). The [Waymo Open dataset](https://waymo.com/open/) is used as a datasource. To run this Code its highly recommended to eather use the [Dockerfile](build/Dockerfile) or the Udacity Workspace, setting up the Environment localy turns out to be very difficult becuase of many dependencies. I also did some local Calculating with dumped data, which is explained further down.
-The Original starter code can be found at [udacity/nd013-c1-vision-starter](https://github.com/udacity/nd013-c1-vision-starter) and the original Problem instructions can be found in the [README_ORIG.md](README_ORIG.md). The modle is trained to detect vehicles, pedestrians and cyclists in an urban environment.
+In this First Project the Task is to train and evaluate a pretrained model from the [TensorFlow 2 Detection Model Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md). The [Waymo Open dataset](https://waymo.com/open/) is used as a datasource. To run this Code its highly recommended to ether use the [Dockerfile](build/Dockerfile) or the Udacity Workspace, setting up the Environment locally turns out to be very difficult because of many dependencies. I also did some local Calculating with dumped data, which is explained further down.
+The Original starter code can be found at [udacity/nd013-c1-vision-starter](https://github.com/udacity/nd013-c1-vision-starter) and the original Problem instructions can be found in the [README_ORIG.md](README_ORIG.md). The model is trained to detect vehicles, pedestrians and cyclists in an urban environment.
 
 ## Exploratory Data Analysis (EDA)
 In the EDA we get a better understanding of the Data we are dealing with. The Code lays in the [Exploratory Data Analysis.ipynb](https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/Exploratory%20Data%20Analysis.ipynb).
 
 ### Display 10 random Images
-The first thing implented is a simple function `display_instances` which shows 10 random picked pictures off of one tfRecord file. An important note is, that in the tfRecordfiles the BBox Coordinates are noramlized and have to be multiplied with height and width.
+The first thing implemented is a simple function `display_instances` which shows 10 random picked pictures off of one tfRecord file. An important note is, that in the tfRecordfiles the BBox Coordinates are normalized and have to be multiplied with height and width.
 
 ```python
 import numpy as np
@@ -73,11 +73,11 @@ display_instances(batch)
 
 The Following conclusions can be drawn from a first look at the Pictures:
 
-* The pictues are resized to 640x640 and dirstored, they do not have the original aspcet Ratio. As we see further down, this resizing leads to a very big number of small Boundingboxes. I would therefore recommend to check wether the pretrained Modle can deal with small objects or not. 
-* Ovaerall Picuterquality is good, sharp and good Lighting. 
+* The pictures are resized to 640x640 and distorted, they do not have the original aspect Ratio. As we see further down, this resizing leads to a very big number of small Boundingboxes. I would therefore recommend to check wether the pretrained Model can deal with small objects or not. 
+* Overall Picturequality is good, sharp and good Lighting. 
 
 ### Classdistribution analysis
-As an Additional EDA task i analysed the Classdistribution along all tfRecordfiles. I took 10 samples from each file and counted the occurrences of the different classes. Besides calculating the 
+As an Additional EDA task i analysed the Class distribution along all tfRecordfiles. I took 10 samples from each file and counted the occurrences of the different classes. Besides calculating the 
 ```python
 import pickle
 
@@ -138,7 +138,9 @@ plt.savefig('classdistribution.png')
 plt.show()
 
 ```
-The Resulting Bar Chart shows the stacked occurrences of each class within one tfRecordfile. The Chart shows th clas 
+The Resulting Bar Chart shows the stacked occurrences of each class within one tfRecordfile. The Chart shows that the Dataset is very imbalanced, that means that the amount of occurrences of a particular class within one file varies. Simply spoken, there are way more Vehicles than there are Pedestrians and almost no cyclists. This leads to two conclusions:
+* A simple mAP validation will give no accurate prediction about the Performance, we should calculate a class-level metric
+* In terms of Cross-Validation we have to make sure that the overall occurrence ratios between the classes is maintained within the individual splits.
 <p align="center" width="80%">
     <img width="80%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/1a0df4bbab02604a576920e1a94b6245d56d554e/visualization/class_distribution.png"> 
 </p>
