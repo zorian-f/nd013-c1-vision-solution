@@ -73,8 +73,8 @@ display_instances(batch)
 
 The Following conclusions can be drawn from a first look at the Pictures:
 
-* The pictues are resized to 640x640 and dirstored, they do not have the original aspcet Ratio. But that should not be a Problem for training.
-* Ovaerall Picuterquality is good, sharp and good Lighting.
+* The pictues are resized to 640x640 and dirstored, they do not have the original aspcet Ratio. As we see further down, this resizing leads to a very big number of small Boundingboxes. I would therefore recommend to check wether the pretrained Modle can deal with small objects or not. 
+* Ovaerall Picuterquality is good, sharp and good Lighting. 
 
 ### Classdistribution analysis
 As an Additional EDA task i analysed the Classdistribution along all tfRecordfiles. I took 10 samples from each file and counted the occurrences of the different classes. Besides calculating the 
@@ -138,7 +138,7 @@ plt.savefig('classdistribution.png')
 plt.show()
 
 ```
-The Resulting Bar Chart shows the stacked occurrences of each class within one tfRecordfile. 
+The Resulting Bar Chart shows the stacked occurrences of each class within one tfRecordfile. The Chart shows th clas 
 <p align="center" width="80%">
     <img width="80%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/1a0df4bbab02604a576920e1a94b6245d56d554e/visualization/class_distribution.png"> 
 </p>
