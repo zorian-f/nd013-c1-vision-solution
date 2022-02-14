@@ -77,7 +77,7 @@ The Following conclusions can be drawn from a first look at the Pictures:
 * Overall Picturequality is good, sharp and good Lighting. 
 
 ### Classdistribution analysis
-As an Additional EDA task i analysed the Class distribution along all tfRecordfiles. I took 10 samples from each file and counted the occurrences of the different classes. Besides calculating the 
+As an Additional EDA task i analysed the Classdistribution along all tfRecordfiles. I took 10 samples from each file and counted the occurrences of the different classes. Besides calculating the Classdistribution i dump all the recordings into a dump-file which i later use to for local processing.
 ```python
 import pickle
 
@@ -147,5 +147,5 @@ The Resulting Bar Chart shows the stacked occurrences of each class within one t
     <img width="80%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/1a0df4bbab02604a576920e1a94b6245d56d554e/visualization/class_distribution.png"> 
 </p>
 
-### Average RMS Brightness
-To get a impression 
+### Local Processing
+All the analyses shown in this Section were processed localy by using the dumped raw data extracted from the tfRecord-files as shown in the Previous section. All the local processing is done in the [local_processing.py](local_processing.py).
