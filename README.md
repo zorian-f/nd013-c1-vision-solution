@@ -183,4 +183,10 @@ As shown in the Classdistribution analysis, there is a imblance in classes. Espe
 ('segment-10107710434105775874_760_000_780_000_with_camera_labels_190.tfrecord', 10)
 ('segment-10107710434105775874_760_000_780_000_with_camera_labels_70.tfrecord', 5)
 ```
-As can bee seen by the first line of the output `[(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]` there are only 0.61% of cyclists, 23.08% pedestrians and 76.30% Vehicles. The result of the analysis confirms the imbalance, which we already saw in the Classdistribution analysis.
+As can bee seen by the first line of the output `[(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]` there are only 0.61% of cyclists, 23.08% pedestrians and 76.30% Vehicles. The result of the analysis confirms the imbalance, which we already saw in the Classdistribution analysis. The rest of the output shows how many recordings of a cyclists are within one tfRecord-file, the last line for exmaple shows that there are 5 occurences of cyclist int `segment-10107710434105775874_760_000_780_000_with_camera_labels_70.tfrecord`.
+#### Image Brightness
+To get an overall impression of image Brightness, i calculated the mean RMS brightness for every tfRecordfile with `plot_mean_rms_brightness()`.
+<p align="center" width="80%">
+    <img width="80%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/d4cd08871ebceb09028b0afe695124505d2ac5a5/visualization/mean_rms_brightness.png"> 
+</p>
+
