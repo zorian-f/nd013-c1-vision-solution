@@ -148,4 +148,8 @@ The Resulting Bar Chart shows the stacked occurrences of each class within one t
 </p>
 
 ### Local Processing
-All the analyses shown in this Section were processed localy by using the dumped raw data extracted from the tfRecord-files as shown in the Previous section. All the local processing is done in the [local_processing.py](local_processing.py).
+All the analyses shown in this Section were processed localy by using the dumped raw data extracted from the tfRecord-files as shown in the Previous section. All the local processing is done in the [local_processing.py](local_processing.py). In `check_bbox` the Coordinates of every Boundingbox are checked on wether they are within a range of 0.0 - 1.0. There is no problem with the BBox Coordinates as cann be seen by the output:
+```
+Maximum Value for bbox 1.0
+Minimum Value for bbox 0.0
+```
