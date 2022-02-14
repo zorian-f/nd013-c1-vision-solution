@@ -156,7 +156,7 @@ Maximum Value for bbox 1.0
 Minimum Value for bbox 0.0
 ```
 #### Analyse Cyclists
-As shown in the Classdistribution analysis, there is a imblance in classes. Especially the cyclsit class is very underrepresented in the dataset. To know a exact percentage of the proportion of each class i calculated the overal percentage per Class in `analyse_cyclists`, i also analysed which tfRecord holds the cyvlist class und how much of them. Depending on which cross-validation method is used later on, this could become handy. The result of the analysis confirms what we already saw in the Classdistribution analysis:
+As shown in the Classdistribution analysis, there is a imblance in classes. Especially the cyclsit class is very underrepresented in the dataset. To know a exact percentage of the proportion of each class i calculated the overal percentage per Class in `analyse_cyclists`, i also analysed which tfRecord holds the cyvlist class und how much of them. Depending on which cross-validation method is used later on, this could become handy.
 ```
 [(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]
 ('segment-10023947602400723454_1120_000_1140_000_with_camera_labels_10.tfrecord', 2)
@@ -183,4 +183,4 @@ As shown in the Classdistribution analysis, there is a imblance in classes. Espe
 ('segment-10107710434105775874_760_000_780_000_with_camera_labels_190.tfrecord', 10)
 ('segment-10107710434105775874_760_000_780_000_with_camera_labels_70.tfrecord', 5)
 ```
-As can bee seen by the first line of the output `[(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]` there are only 0.61% of cyclists, 23.08% pedestrians and 76.30% Vehicles. 
+As can bee seen by the first line of the output `[(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]` there are only 0.61% of cyclists, 23.08% pedestrians and 76.30% Vehicles. The result of the analysis confirms the imbalance, which we already saw in the Classdistribution analysis.
