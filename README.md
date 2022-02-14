@@ -155,3 +155,31 @@ In `check_bbox` the Coordinates of every Boundingbox are checked on wether they 
 Maximum Value for bbox 1.0
 Minimum Value for bbox 0.0
 ```
+#### Analyse Cyclists
+As shown in the Classdistribution analysis, there is a imblance in classes. Especially the cyclsit class is very underrepresented in the dataset. To know a exact percentage of the proportion of each class i calculated the overal percentage per Class in `analyse_cyclists`, i also analysed which tfRecord holds the cyvlist class und how much of them. Depending on which cross-validation method is used later on, this could become handy. The result of the analysis confirms what we already saw in the Classdistribution analysis:
+```
+[(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]
+('segment-10023947602400723454_1120_000_1140_000_with_camera_labels_10.tfrecord', 2)
+('segment-10023947602400723454_1120_000_1140_000_with_camera_labels_70.tfrecord', 1)
+('segment-1005081002024129653_5313_150_5333_150_with_camera_labels_100.tfrecord', 2)
+('segment-1005081002024129653_5313_150_5333_150_with_camera_labels_140.tfrecord', 5)
+('segment-1005081002024129653_5313_150_5333_150_with_camera_labels_180.tfrecord', 7)
+('segment-10061305430875486848_1080_000_1100_000_with_camera_labels_140.tfrecord', 4)
+('segment-10061305430875486848_1080_000_1100_000_with_camera_labels_20.tfrecord', 4)
+('segment-10061305430875486848_1080_000_1100_000_with_camera_labels_30.tfrecord', 13)
+('segment-10061305430875486848_1080_000_1100_000_with_camera_labels_50.tfrecord', 4)
+('segment-10072140764565668044_4060_000_4080_000_with_camera_labels_180.tfrecord', 9)
+('segment-10072140764565668044_4060_000_4080_000_with_camera_labels_30.tfrecord', 2)
+('segment-10075870402459732738_1060_000_1080_000_with_camera_labels_70.tfrecord', 15)
+('segment-10082223140073588526_6140_000_6160_000_with_camera_labels_0.tfrecord', 23)
+('segment-10082223140073588526_6140_000_6160_000_with_camera_labels_170.tfrecord', 2)
+('segment-10082223140073588526_6140_000_6160_000_with_camera_labels_180.tfrecord', 2)
+('segment-10082223140073588526_6140_000_6160_000_with_camera_labels_50.tfrecord', 5)
+('segment-10094743350625019937_3420_000_3440_000_with_camera_labels_100.tfrecord', 5)
+('segment-10094743350625019937_3420_000_3440_000_with_camera_labels_120.tfrecord', 5)
+('segment-10094743350625019937_3420_000_3440_000_with_camera_labels_130.tfrecord', 5)
+('segment-10096619443888687526_2820_000_2840_000_with_camera_labels_30.tfrecord', 6)
+('segment-10096619443888687526_2820_000_2840_000_with_camera_labels_90.tfrecord', 3)
+('segment-10107710434105775874_760_000_780_000_with_camera_labels_190.tfrecord', 10)
+('segment-10107710434105775874_760_000_780_000_with_camera_labels_70.tfrecord', 5)
+```
