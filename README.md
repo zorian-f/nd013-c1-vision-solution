@@ -183,3 +183,4 @@ As shown in the Classdistribution analysis, there is a imblance in classes. Espe
 ('segment-10107710434105775874_760_000_780_000_with_camera_labels_190.tfrecord', 10)
 ('segment-10107710434105775874_760_000_780_000_with_camera_labels_70.tfrecord', 5)
 ```
+As can bee seen by the first line of the output `[(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]` there are only 0.61% of cyclists, 23.08% pedestrians and 76.30% Vehicles. 
