@@ -78,7 +78,7 @@ def plot_mean_rms_brightness():
 
 def display_instance(number):
     '''
-    This Function takes a Number and Plots and saves the anotated picture
+    This Function takes a Number and Plots/saves the realated anotated picture
     '''
     colormap = {1: 'r', 2: 'g', 4: 'b'}
     my_dpi=96
@@ -109,6 +109,9 @@ def display_instance(number):
     plt.savefig(np.str(number)+'_'+filename+'.png', bbox_inches='tight', pad_inches = 0, dpi=my_dpi)
   
 def plot_bbox_histogramm():
+    '''
+    This Function Plots a Histogram which shows the Distrubtion ob BBox-size [square-Pixels]
+    '''
     records = extract_from_dump('groundtruth_boxes')
     height = []
     width = []
@@ -143,13 +146,16 @@ def plot_bbox_histogramm():
     
   
 def extract_from_dump(key):
+    '''
+    Helper Function which extract Data from the Dump
+    '''
     values = [a_dict[key].numpy() for a_dict in data]
     return values
     
 if __name__ == "__main__":
 
     #Loading the dump
-    path = 'C:/Users/QXZ0087/Downloads/datadump'
+    path = 'PATH TO DUMPFILE'
     data = pickle.load(open(path, "rb"))
     
     #main()
