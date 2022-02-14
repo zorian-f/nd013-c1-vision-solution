@@ -184,6 +184,20 @@ As shown in the Classdistribution analysis, there is a imblance in classes. Espe
 ('segment-10107710434105775874_760_000_780_000_with_camera_labels_70.tfrecord', 5)
 ```
 As can bee seen by the first line of the output `[(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]` there are only 0.61% of cyclists, 23.08% pedestrians and 76.30% Vehicles. The result of the analysis confirms the imbalance, which we already saw in the Classdistribution analysis. The rest of the output shows how many recordings of a cyclists are within one tfRecord-file, the last line for exmaple shows that there are 5 occurences of cyclist int `segment-10107710434105775874_760_000_780_000_with_camera_labels_70.tfrecord`.
+#### Boundingbox Size
+The Pictures of the Dataset were heavily resized and distored. Along the pictures, the Boundingboxes got resized aswell and therefore Boxes which were small in the first got even smaller. The get a good Impression of the Sizedistribution i created a Histogramm which shows the distribution of Boxsizes (squarepixels). The three Histogramms are from the same data, only plotted with different ranges.
+
+<p align="center" width="80%">
+    <img width="80%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/bbox_size_histo.png"> 
+</p>
+
+The left graph shows the data with maximum range, what stands out is that there is a notably big Boundginbox (>400k) If we sample a pictures from that Dataset we can see that there is a error in the dataset. The Recording suggests that there is a pedestrian over the whole screen whihc makes no sense.
+
+<p float="left" align="middle" width="49%" >
+  <img src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/642_segment-11252086830380107152_1540_000_1560_000_with_camera_labels_50.tfrecord.png" width="49%"/>
+  <img src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/646_segment-11252086830380107152_1540_000_1560_000_with_camera_labels_180.tfrecord.png" width="49%"/> 
+</p>
+
 #### Image Brightness
 To get an overall impression of image Brightness, i calculated the mean RMS brightness for every tfRecordfile with `plot_mean_rms_brightness()`.
 <p align="center" width="80%">
