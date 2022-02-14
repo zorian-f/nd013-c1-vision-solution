@@ -198,6 +198,14 @@ The left graph shows the data with maximum range, what stands out is that there 
   <img src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/646_segment-11252086830380107152_1540_000_1560_000_with_camera_labels_180.tfrecord.png" width="49%"/> 
 </p>
 
+The Histogram also schows that there are a lot of "small" BBoxes. In the Pictures below we can see a reference box with 10x10 and 10x20 Pixel.
+
+<p float="left" align="middle" width="49%" >
+  <img src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/109_segment-10153695247769592104_787_000_807_000_with_camera_labels_30.tfrecord.png" width="49%"/>
+  <img src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/312_segment-10596949720463106554_1933_530_1953_530_with_camera_labels_0.tfrecord.png" width="49%"/> 
+</p>
+
+
 #### Image Brightness
 To get an overall impression of image Brightness, i calculated the mean RMS brightness for every tfRecordfile with `plot_mean_rms_brightness()`.
 <p align="center" width="80%">
