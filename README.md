@@ -187,11 +187,11 @@ As can bee seen by the first line of the output `[(1, 76.3081267096091, 17296), 
 #### Boundingbox Size
 The Pictures of the Dataset were heavily resized and distored. Along the pictures, the Boundingboxes got resized aswell and therefore Boxes which were small in the first got even smaller. The get a good Impression of the Sizedistribution i created a Histogramm which shows the distribution of Boxsizes (squarepixels). The three Histogramms are from the same data, only plotted with different ranges.
 
-<p align="center" width="80%">
-    <img width="80%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/bbox_size_histo.png"> 
+<p align="center" width="100%">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/bbox_size_histo.png"> 
 </p>
 
-The left graph shows the data with maximum range, what stands out is that there is a notably big Boundginbox (>400k) If we sample a pictures from that Dataset we can see that there is a error in the dataset. The Recording suggests that there is a pedestrian over the whole screen whihc makes no sense.
+The left graph shows the data with maximum range, what stands out is that there is a notably big Boundginbox (>400k) If we sample a pictures from that Dataset we can see that there is a error in the dataset. The Recording suggests that there is a pedestrian over the whole screen whihc makes no sense. Because of that error the `segment-11252086830380107152_1540_000_1560_000_with_camera_labels.tfrecord` should no be used. 
 
 <p float="left" align="middle" width="49%" >
   <img src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/642_segment-11252086830380107152_1540_000_1560_000_with_camera_labels_50.tfrecord.png" width="49%"/>
