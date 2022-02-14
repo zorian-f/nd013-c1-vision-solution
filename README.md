@@ -190,3 +190,9 @@ To get an overall impression of image Brightness, i calculated the mean RMS brig
     <img width="80%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/d4cd08871ebceb09028b0afe695124505d2ac5a5/visualization/mean_rms_brightness.png"> 
 </p>
 
+What stands out is that there are some dips in brightness, for exmaple in Dataset-number 6 and 37. When we take a sample Picture with `display_instance()` from those Datasets we can see that those records were taken at nighttime. Even tough there are some recordings made at nighttime, most of the Dataset is taken in broad daylight. Because of the underrepresentation of daylight recordings, maybe a augmentation that turns down brightness could improve nighttime performance.
+
+<p float="left" align="middle" width="49%" >
+  <img src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/371_segment-10724020115992582208_7660_400_7680_400_with_camera_labels_130.tfrecord.png" width="49%"/>
+  <img src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/61_segment-10082223140073588526_6140_000_6160_000_with_camera_labels_0.tfrecord.png" width="49%"/> 
+</p>
