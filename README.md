@@ -141,11 +141,11 @@ plt.show()
 The Resulting Bar Chart shows the stacked occurrences of each class within one tfRecordfile. The Chart shows that the Dataset is very imbalanced, that means that the amount of occurrences of a particular class within one file varies. Simply spoken, there are way more Vehicles than there are Pedestrians and almost no cyclists. This leads to two conclusions:
 * A simple mAP validation will give no accurate prediction about the Performance, we should calculate a class-level metric.
 * In terms of Cross-Validation we have to make sure that the overall occurrence ratio between the classes is maintained within the individual splits. We also have to make sure that all classes even occur in our Splits, with the sparse occurrence of cyclists this could be difficult if the splits are randomly picked. I suggest to use a stratified cross validation like a stratified KFold.
-* The Improve Training and avoid bias towards one class, one could use oversampling.
-
-https://www.researchgate.net/publication/224541268_Learning_from_Imbalanced_Data
+* To Improve Training and avoid bias towards one class, one could use oversampling.
 
 <p align="center" width="80%">
     <img width="80%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/1a0df4bbab02604a576920e1a94b6245d56d554e/visualization/class_distribution.png"> 
 </p>
 
+### Average RMS Brightness
+To get a impression 
