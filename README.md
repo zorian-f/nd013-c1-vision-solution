@@ -231,3 +231,8 @@ What stands out is that there are some dips in brightness, for exmaple in Datase
   <img src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/371_segment-10724020115992582208_7660_400_7680_400_with_camera_labels_130.tfrecord.png" width="49%"/>
   <img src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/61_segment-10082223140073588526_6140_000_6160_000_with_camera_labels_0.tfrecord.png" width="49%"/> 
 </p>
+
+## Training
+In this. Section we train and evaluate the model.
+
+### Reference run
