@@ -3,7 +3,12 @@ In this First Project the Task is to train and evaluate a pretrained model from 
 The Original starter code can be found at [udacity/nd013-c1-vision-starter](https://github.com/udacity/nd013-c1-vision-starter) and the original Problem instructions can be found in the [README_ORIG.md](README_ORIG.md). The model is trained to detect vehicles, pedestrians and cyclists in an urban environment.
 
 ## Exploratory Data Analysis (EDA)
-In the EDA we get a better understanding of the Data we are dealing with. The Code lays in the [Exploratory Data Analysis.ipynb](https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/Exploratory%20Data%20Analysis.ipynb).
+In the EDA we get a better understanding of the Data we are dealing with. The Code lays in the [Exploratory Data Analysis.ipynb](https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/Exploratory%20Data%20Analysis.ipynb). The presintalled Firefox browser is crahsing all the time, therfore its suggested to install and use chromium-browser with following shell-commands:
+```shell
+sudo apt-get update
+sudo apt-get install chromium-browser
+chromium-browser --no-sandbox
+```
 
 ### Display 10 random Images
 The first thing implemented is a simple function `display_instances` which shows 10 random picked pictures off of one tfRecord file. An important note is, that in the tfRecordfiles the BBox Coordinates are normalized and have to be multiplied with height and width.
@@ -233,6 +238,9 @@ What stands out is that there are some dips in brightness, for exmaple in Datase
 </p>
 
 ## Training
-In this. Section we train and evaluate the model.
+In this Section we train and evaluate the model, first we have to download the pretrained model and move it in the right direction, this is done by the following shell-command:
+```shell
+wget http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz && mv ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz /home/workspace/experiments/pretrained_model/
+```
 
 ### Reference run
