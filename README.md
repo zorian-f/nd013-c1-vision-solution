@@ -314,3 +314,12 @@ if __name__ == "__main__":
     logger.info('Creating splits...')
     split(args.data_dir)
 ```
+## Refference Run
+The first run gives a refference to compare to. I generate a `pipeline_new.config` by executing the `edit_config.py` with the correspoding directorys:
+```shell
+python edit_config.py --train_dir /home/workspace/data/waymo/train/ --eval_dir /home/workspace/data/waymo/val/ --batch_size 2 --checkpoint /home/workspace/experiments/pretrained_model/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8/checkpoint/ckpt-0 --label_map /home/workspace/experiments/label_map.pbtxt
+```
+I start the training and let it run for a short time:
+```shell
+python experiments/model_main_tf2.py --model_dir=experiments/reference/ --pipeline_config_path=experiments/reference/pipeline_new.config
+```
