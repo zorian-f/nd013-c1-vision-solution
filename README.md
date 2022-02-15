@@ -337,3 +337,5 @@ warmup_learning_rate: 0.0013333     # previuos 0.0133
 <p align="center" width="100%">
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/2f27f3f71568962f4d44134f9645997be5280634/visualization/traing_and_val/reff_run_2_adjusted_lr.png"> 
 </p>
+With 
+With the adjusted learningrate th total-loss is decreasing much faster, after 1k Steps its already at 0.8 wereas the previous run was at somewhere around 5.
