@@ -23,6 +23,7 @@ def split(data_dir):
     val_dir = data_dir+'/val'
     train_and_val_dir = data_dir+'/training_and_validation'
     
+    # check if folders exist and create them if not
     if not os.path.exists(train_dir):
         os.makedirs(train_dir)
     if not os.path.exists(val_dir):
@@ -30,20 +31,20 @@ def split(data_dir):
 
     files = glob.glob(train_and_val_dir+'/*')
     
-    #For the first try we split the data naively in 80%-20% train and validation
+    # we split the data naively in 80%-20% train and validation
     random.shuffle(files)
     train_size = int(len(files)*0.8)
     train_files = files[:train_size]
     eval_files = files[train_size:]
 
-    #delete all exisitng files/splits
+    # delete all exisitng files/splits
     del_files = glob.glob(train_dir+'/*') + glob.glob(val_dir+'/*')
     if del_files:
         for file in del_files:
             os.remove(file)
 
 
-    #Create symlinks for the splitdata
+    # Create symlinks for the splitdata
     for files in train_files:
         os.symlink(files, train_dir+'/'+os.path.basename(files))
     
