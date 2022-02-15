@@ -242,5 +242,10 @@ In this Section we train and evaluate the model, first we have to download the p
 ```shell
 wget http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz && mv ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz /home/workspace/experiments/pretrained_model/
 ```
+I also noticed that when i delete files, e. g. training data over the "desktop" interface, files dont get removed completely, they are moved to trash. I found it helpful to use `trash-cli` to get rid of them:
+```shell
+sudo apt install trash-cli
+trash-empty
+```
 
 ### Reference run
