@@ -323,3 +323,11 @@ I start the training and let it run for a short time:
 ```shell
 python experiments/model_main_tf2.py --model_dir=experiments/reference/ --pipeline_config_path=experiments/reference/pipeline_new.config
 ```
+What stands out imidiately is that the loss is bouncing and very high:
+
+<p align="center" width="100%">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/629a8ea0747752ff78d61bfba3afc40a9ec8be27/visualization/traing_and_val/reff_run_1.png"> 
+</p>
+
+As sugessted in class, a bouncing loss-function means that the learning rate is too high, so i did stop the training and also didnt evaluate. Instead i tried adjusting the learning-rate, i did so by changing the corresponding values in the `pipeline_new.config`:
+
