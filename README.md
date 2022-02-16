@@ -3,7 +3,7 @@ In this First Project the Task is to train and evaluate a pretrained model from 
 The Original starter code can be found at [udacity/nd013-c1-vision-starter](https://github.com/udacity/nd013-c1-vision-starter) and the original Problem instructions can be found in the [README_ORIG.md](README_ORIG.md). The model is trained to detect vehicles, pedestrians and cyclists in an urban environment.
 
 ## Exploratory Data Analysis (EDA)
-In the EDA we get a better understanding of the Data we are dealing with. The Code lays in the [Exploratory Data Analysis.ipynb](https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/Exploratory%20Data%20Analysis.ipynb). The presintalled Firefox browser is crahsing all the time, therfore its suggested to install and use chromium-browser with following shell-commands:
+In the EDA we get a better understanding of the Data we are dealing with. The Code lays in the [Exploratory Data Analysis.ipynb](https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/Exploratory%20Data%20Analysis.ipynb). The pre-installed Firefox browser is crashing all the time, therefore its suggested to install and use chromium-browser with following shell-commands:
 ```shell
 sudo apt-get update
 sudo apt-get install chromium-browser
@@ -11,7 +11,7 @@ chromium-browser --no-sandbox
 ```
 
 ### Display 10 random Images
-The first thing implemented is a simple function `display_instances` which shows 10 random picked pictures off of one tfRecord file. An important note is, that in the tfRecordfiles the BBox Coordinates are normalized and have to be multiplied with height and width.
+The first thing implemented is a simple function `display_instances` which shows 10 random picked pictures off from one tfRecord file. An important note is, that in the tfRecordfiles the BBox Coordinates are normalized and have to be multiplied with height and width.
 
 ```python
 import numpy as np
@@ -78,18 +78,18 @@ display_instances(batch)
 
 The Following conclusions can be drawn from a first look at the Pictures:
 
-* The pictures are resized to 640x640 and distorted, they do not have the original aspect Ratio. As we see further down, this resizing leads to a very big number of small Boundingboxes. I would therefore recommend to check wether the pretrained Model can deal with small objects or not. 
-* Overall Picturequality is good, sharp and good Lighting. 
+* The pictures are resized to 640x640 and distorted, they do not have the original aspect Ratio. As we see further down, this resizing leads to a very big number of small Bounding boxes. I would therefore recommend to check whether the pretrained Model can deal with small objects or not. 
+* Overall Image quality is good, sharp and good Lighting. 
 
-### Classdistribution analysis
-As an Additional EDA task i analysed the Classdistribution along all tfRecordfiles. I took 10 samples from each file and counted the occurrences of the different classes. Besides calculating the Classdistribution i dump all the recordings into a dump-file which i later use to for local processing.
+### Class Distribution analysis
+As an Additional EDA task I analyzed the Class Distribution along all tfRecordfiles. I took 10 samples from each file and counted the occurrences of the different classes. Besides calculating the Class Distribution I dump all the recordings into a dump-file which I later use to for local processing.
 ```python
 import pickle
 
 import matplotlib.pyplot as plt
 '''
 In this Section two things are happening:
--10 recordings are taken from each tfRecord file and the amount per class
+-10 recordings are taken from each tfRecord file and the number of class occurrences
  per tfRecord file is calculated to get a sense for the classdistribution 
 -We dump de data -> 10*97 = 970 Images, Classes and Boxes to be able to
  process the Data locally
@@ -145,7 +145,7 @@ plt.show()
 ```
 The Resulting Bar Chart shows the stacked occurrences of each class within one tfRecordfile. The Chart shows that the Dataset is very imbalanced, that means that the amount of occurrences of a particular class within one file varies. Simply spoken, there are way more Vehicles than there are Pedestrians and almost no cyclists. This leads to two conclusions:
 * A simple mAP validation will give no accurate prediction about the Performance, we should calculate a class-level metric.
-* In terms of Cross-Validation we have to make sure that the overall occurrence ratio between the classes is maintained within the individual splits. We also have to make sure that all classes even occur in our Splits, with the sparse occurrence of cyclists this could be difficult if the splits are randomly picked. I suggest to use a stratified cross validation like a stratified KFold.
+* In terms of Cross-Validation we must make sure that the overall occurrence ratio between the classes is maintained within the individual splits. We also must make sure that all classes even occur in our Splits, with the sparse occurrence of cyclists this could be difficult if the splits are randomly picked. I suggest using a stratified cross validation like a stratified KFold.
 * To Improve Training and avoid bias towards one class, one could use oversampling.
 
 <p align="center" width="80%">
@@ -153,15 +153,15 @@ The Resulting Bar Chart shows the stacked occurrences of each class within one t
 </p>
 
 ### Local Processing
-All the analyses shown in this Section were processed localy by using the dumped raw data extracted from the tfRecord-files as shown in the Previous section. All the local processing is done in the [local_processing.py](local_processing.py).
+All the analyses shown in this Section were processed locally by using the dumped raw data extracted from the tfRecord-files as shown in the Previous section. All the local processing is done in the [local_processing.py](local_processing.py).
 #### Boundingbox check
-In `check_bbox` the Coordinates of every Boundingbox are checked on wether they are within a range of 0.0 - 1.0. There is no problem with the BBox Coordinates as cann be seen by the output:
+In `check_bbox` the Coordinates of every Boundingbox are checked on whether they are within a range of 0.0 - 1.0. There is no problem with the BBox Coordinates as can be seen by the output:
 ```
 Maximum Value for bbox 1.0
 Minimum Value for bbox 0.0
 ```
-#### Analyse Cyclists
-As shown in the Classdistribution analysis, there is a imblance in classes. Especially the cyclsit class is very underrepresented in the dataset. To know a exact percentage of the proportion of each class i calculated the overal percentage per Class in `analyse_cyclists`, i also analysed which tfRecord holds the cyvlist class und how much of them. Depending on which cross-validation method is used later on, this could become handy.
+#### Analyze Cyclists
+As shown in the Class Distribution analysis, there is a imbalance in classes. Especially the cyclsit class is very underrepresented in the dataset. To know a exact percentage of the proportion of each class I calculated the overall percentage per Class in `analyse_cyclists`, I also analysed which tfRecord holds the cyclist class und how much of them. Depending on which cross-validation method is used later on, this could become handy.
 ```
 [(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]
 ('segment-10023947602400723454_1120_000_1140_000_with_camera_labels_10.tfrecord', 2)
@@ -190,20 +190,20 @@ As shown in the Classdistribution analysis, there is a imblance in classes. Espe
 ```
 As can bee seen by the first line of the output `[(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]` there are only 0.61% of cyclists, 23.08% pedestrians and 76.30% Vehicles. The result of the analysis confirms the imbalance, which we already saw in the Classdistribution analysis. The rest of the output shows how many recordings of a cyclists are within one tfRecord-file, the last line for exmaple shows that there are 5 occurences of cyclist int `segment-10107710434105775874_760_000_780_000_with_camera_labels_70.tfrecord`.
 #### Boundingbox Size
-The Pictures of the Dataset were heavily resized and distored. Along the pictures, the Boundingboxes got resized aswell and therefore Boxes which were small in the first got even smaller. The get a good Impression of the Sizedistribution i created a Histogramm which shows the distribution of Boxsizes (squarepixels). The three Histogramms are from the same data, only plotted with different ranges.
+The Pictures of the Dataset were heavily resized and distorted. Along the pictures, the Boundingboxes got resized as well and therefore Boxes which were small in the first got even smaller. The get a good Impression of the Size distribution I created a Histogram which shows the distribution of Box sizes (squarepixels). The three Histograms are from the same data, only plotted with different ranges.
 
 <p align="center" width="100%">
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/bbox_size_histo.png"> 
 </p>
 
-The left graph shows the data with maximum range, what stands out is that there is a notably big Boundginbox (>400k) If we sample a pictures from that Dataset we can see that there is a error in the dataset. The Recording suggests that there is a pedestrian over the whole screen whihc makes no sense. Because of that error the `segment-11252086830380107152_1540_000_1560_000_with_camera_labels.tfrecord` should no be used. 
+The left graph shows the data with maximum range, what stands out is that there is a notably big Boundginbox (>400k) If we sample a pictures from that Dataset we can see that there is a error in the dataset. The Recording suggests that there is a pedestrian over the whole screen which makes no sense. Because of that error the `segment-11252086830380107152_1540_000_1560_000_with_camera_labels.tfrecord` should no be used. 
 
 <p float="left" align="middle" width="49%" >
   <img src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/642_segment-11252086830380107152_1540_000_1560_000_with_camera_labels_50.tfrecord.png" width="49%"/>
   <img src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/646_segment-11252086830380107152_1540_000_1560_000_with_camera_labels_180.tfrecord.png" width="49%"/> 
 </p>
 
-The Histogram also schows that there are a lot of "small" BBoxes (note the logarithmitc scale!). In the Pictures below we can see examples of small BBoxes. As stated in the the [SSD Paper](https://arxiv.org/pdf/1512.02325.pdf), the model got a bad performance at small objects and is very sensitiv to BBox-size:
+The Histogram also shows that there are a lot of "small" BBoxes (note the logarithmic scale!). In the Pictures below we can see examples of small BBoxes. As stated in the the [SSD Paper](https://arxiv.org/pdf/1512.02325.pdf), the model got a bad performance at small objects and is very sensitive to BBox-size:
 >... Figure 4 shows that SSD is very sensitive to the bounding box size. In other words, it has much worse performance on smaller objects than bigger objects. ...
 
 The Paper also suggests random cropping as a augmentation method to increase the performance on small objects:
@@ -225,12 +225,12 @@ In the left Picture two reference-boxes can be seen, to get a better understandi
 
 
 #### Image Brightness
-To get an overall impression of image Brightness, i calculated the mean RMS brightness for every tfRecordfile with `plot_mean_rms_brightness()`.
+To get an overall impression of image Brightness, I calculated the mean RMS brightness for every tfRecordfile with `plot_mean_rms_brightness()`.
 <p align="center" width="80%">
     <img width="80%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/d4cd08871ebceb09028b0afe695124505d2ac5a5/visualization/mean_rms_brightness.png"> 
 </p>
 
-What stands out is that there are some dips in brightness, for exmaple in Dataset-number 6 and 37. When we take a sample Picture with `display_instance()` from those Datasets we can see that those records were taken at nighttime. Even tough there are some recordings made at nighttime, most of the Dataset is taken in broad daylight. Because of the underrepresentation of nighttime recordings, maybe a augmentation that turns down brightness could improve nighttime performance.
+What stands out is that there are some dips in brightness, for examaple in Dataset-number 6 and 37. When we take a sample Picture with `display_instance()` from those Datasets we can see that those records were taken at nighttime. Even though there are some recordings made at nighttime, most of the Dataset is taken in broad daylight. Because of the underrepresentation of nighttime recordings, maybe an augmentation that turns down brightness could improve nighttime performance.
 
 <p float="left" align="middle" width="49%" >
   <img src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/371_segment-10724020115992582208_7660_400_7680_400_with_camera_labels_130.tfrecord.png" width="49%"/>
@@ -238,11 +238,11 @@ What stands out is that there are some dips in brightness, for exmaple in Datase
 </p>
 
 ## Training
-In this Section we train and evaluate the model, first we have to download the pretrained model and move it in the right direction, this is done by the following shell-command:
+In this Section we train and evaluate the model, first we must download the pretrained model and move it in the right direction, this is done by the following shell-command:
 ```shell
 wget http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz && mv ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz /home/workspace/experiments/pretrained_model/
 ```
-I also noticed that when i delete files, e. g. training data over the "desktop" interface, files dont get removed completely, they are moved to trash. I found it helpful to use `trash-cli` to get rid of them:
+I also noticed that when I delete files, e. g. training data over the "desktop" interface, files dont get removed completely, they are moved to trash. I found it helpful to use `trash-cli` to get rid of them:
 ```shell
 sudo apt install trash-cli
 trash-empty
@@ -250,7 +250,7 @@ trash-empty
 All the shell-commands can be found in [commands.sh](commands.sh).
 
 ### Create Splits
-First we have to create splits, i did choose a ratio of 80% Training and 20% validation data (this is a common ratio as learned in class). I do not create a test-split because these are already given. I do create symbolic links of the data to save space. The code for creating splits can be found in [create_splits.py](create_splits.py):
+First we have to create splits, I did choose a ratio of 80% Training and 20% validation data (this is a common ratio as learned in class). I do not create a test-split because these are already given. I do create symbolic links of the data to save space. The code for creating splits can be found in [create_splits.py](create_splits.py):
 ```python
 import argparse
 import glob
@@ -329,7 +329,7 @@ What stands out imidiately is that the loss is bouncing and very high:
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/629a8ea0747752ff78d61bfba3afc40a9ec8be27/visualization/traing_and_val/reff_run_1.png"> 
 </p>
 
-As sugessted in class, a bouncing loss-function means that the learning rate is too high, so i did stop the training and also didnt evaluate. Instead i tried adjusting the learning-rate, i did so by changing the corresponding values in the `pipeline_new.config`:
+As suggested in class, a bouncing loss-function means that the learning rate is too high, so I did stop the training and also didn't evaluate. Instead I tried adjusting the learning-rate, I did so by changing the corresponding values in the `pipeline_new.config`:
 ```
 learning_rate_base: 0.004           # previuos 0.04
 warmup_learning_rate: 0.0013333     # previuos 0.0133
@@ -338,7 +338,7 @@ warmup_learning_rate: 0.0013333     # previuos 0.0133
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/2f27f3f71568962f4d44134f9645997be5280634/visualization/traing_and_val/reff_run_2_adjusted_lr.png"> 
 </p>
 
-With the adjusted learningrate the total-loss is decreasing much faster, after 1k Steps its already at 0.8 wereas the previous run was at somewhere around 5. With the adjusted Parameters i did a run with evluation. There is a "bump" in the data, this is due to en iterruption of the evaluation (stopping and resuming it), later graphs wont have this bump. 
+With the adjusted learning rate the total-loss is decreasing much faster, after 1k Steps its already at 0.8 whereas the previous run was at somewhere around 5. With the adjusted Parameters i did a run with evaluation. There is a "bump" in the data, this is due to an interruption of the evaluation (stopping and resuming it), later graphs won't have this bump. 
 
 <p align="center" width="100%">
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/16240ee5a5a024c830485e2b3f74ea81a65502dd/visualization/traing_and_val/reff_run_3_1.png">
@@ -347,7 +347,7 @@ With the adjusted learningrate the total-loss is decreasing much faster, after 1
 </p>
 
 ### Experiment 1
-While doing the Refferencerun i noticed that the train-loop is using up almost all GPU memory (check with `nvidia-smi` in terminal), this can lead to not having enough memory for running the evaluation-loop simultaneously. TensorFlow gives us an option to limit how much GPU memory is used ([TensorFlow Guide](https://www.tensorflow.org/guide/gpu#limiting_gpu_memory_growth)). As suggested in the Guide i added the following code to the `model_main_tf2_py`:
+While doing the Reference run I noticed that the train-loop is using up almost all GPU memory (check with `nvidia-smi` in terminal), this can lead to not having enough memory for running the evaluation-loop simultaneously. TensorFlow gives us an option to limit how much GPU memory is used ([TensorFlow Guide](https://www.tensorflow.org/guide/gpu#limiting_gpu_memory_growth)). As suggested in the Guide i added the following code to the `model_main_tf2_py`:
 ```Python
 gpus = tf.config.list_physical_devices('GPU')
 if gpus:
@@ -362,7 +362,7 @@ if gpus:
     # Virtual devices must be set before GPUs have been initialized
     print(e)
 ```
-I found 9GB to be sufficient for the training-loop and leave the rest for evaluation. The modded code can be found in [model_main_tf2_mod.py](experiments/model_main_tf2_mod.py). In this experiment, the only Parameter i change was `batch_size: 5`:
+I found 9GB to be sufficient for the training-loop and leave the rest for evaluation. The code can be found in [model_main_tf2_mod.py](experiments/model_main_tf2_mod.py). In this experiment, the only Parameter I changed is `batch_size: 5`:
 
 <p align="center" width="100%">
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/84fbcee0777da993a0db850d347a695245290749/visualization/traing_and_val/exp1_run_1.PNG">
@@ -370,7 +370,7 @@ I found 9GB to be sufficient for the training-loop and leave the rest for evalua
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/84fbcee0777da993a0db850d347a695245290749/visualization/traing_and_val/exp1_run_3.PNG">
 </p>
 
-This yields to a very good result, the traning- and evluationloss are bove converging very fast to a Value of 0.5. We can also See that as aspected in the model perfomance better at large objects rather then small ones:
+This yields to a very good result, the training- and evaluation loss are bove converging very fast to a Value of 0.5. We can also See that as expected in the model performance better at large objects rather than small ones:
 
 ```
  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.170
@@ -386,14 +386,14 @@ This yields to a very good result, the traning- and evluationloss are bove conve
  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.598
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.583
 ```
-The Picture bellow is taken from the TensorBoard and shows on the Prediction on the left and the ground truth to the right. We can see that the model struggles to detect smaller objects. As metioned in the EDA Section, this is a weakpoint with this model.
+The Picture bellow is taken from the TensorBoard and shows on the Prediction on the left and the ground truth to the right. We can see that the model struggles to detect smaller objects. As mentioned in the EDA Section, this is a weak point with this model.
 
 <p align="center" width="100%">
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/84fbcee0777da993a0db850d347a695245290749/visualization/traing_and_val/side_by_side1.png">
 </p>
 
 ### Experiment 2
-For this experiment i use augmentation to try improve the results, to visualize the used methods i use the [Jupyter Notebook](https://github.com/zorian-f/nd013-c1-vision-solution/blob/3d606565d282bfb3017939463f6745b0db87837e/Explore%20augmentations.ipynb). As the [SSD Paper](https://arxiv.org/pdf/1512.02325.pdf) suggests, random cropping should improve the performance for smaller objects. In the EDA we also saw that there are nighttime recordings, so i did also add a brightness adjusting method. There are several built-in augmentation methos that come with the TensorFlow Object Detection API the, [here](https://github.com/tensorflow/models/blob/master/research/object_detection/protos/preprocessor.proto) is a full list. I did choose to use the following methods:
+For this experiment I use augmentation to try improve the results, to visualize the used methods I use the [Jupyter Notebook](https://github.com/zorian-f/nd013-c1-vision-solution/blob/3d606565d282bfb3017939463f6745b0db87837e/Explore%20augmentations.ipynb). As the [SSD Paper](https://arxiv.org/pdf/1512.02325.pdf) suggests, random cropping should improve the performance for smaller objects. In the EDA we also saw that there are nighttime recordings, so I did also add a brightness adjusting method. There are several built-in augmentation methods that come with the TensorFlow Object Detection API the, [here](https://github.com/tensorflow/models/blob/master/research/object_detection/protos/preprocessor.proto) is a full list. I did choose to use the following methods:
 '''Python
 random_adjust_brightness
 ssd_random_crop
