@@ -143,7 +143,7 @@ plt.savefig('classdistribution.png')
 plt.show()
 
 ```
-The Resulting Bar Chart shows the stacked occurrences of each class within one tfRecordfile. The Chart shows that the Dataset is very imbalanced, that means that the amount of occurrences of a particular class within one file varies. Simply spoken, there are way more Vehicles than there are Pedestrians and almost no cyclists. This leads to two conclusions:
+The Resulting Bar Chart shows the stacked occurrences of each class within one tfRecordfile. The Chart shows that the Dataset is very imbalanced, that means that the amount of occurrences of a particular class within one file varies. Simply spoken, there are way more Vehicles than there are Pedestrians and almost no cyclists. This leads the following conclusions:
 * A simple mAP validation will give no accurate prediction about the Performance, we should calculate a class-level metric.
 * In terms of Cross-Validation we must make sure that the overall occurrence ratio between the classes is maintained within the individual splits. We also must make sure that all classes even occur in our Splits, with the sparse occurrence of cyclists this could be difficult if the splits are randomly picked. I suggest using a stratified cross validation like a stratified KFold.
 * To Improve Training and avoid bias towards one class, one could use oversampling.
@@ -153,15 +153,15 @@ The Resulting Bar Chart shows the stacked occurrences of each class within one t
 </p>
 
 ### Local Processing
-All the analyses shown in this Section were processed locally by using the dumped raw data extracted from the tfRecord-files as shown in the Previous section. All the local processing is done in the [local_processing.py](local_processing.py).
+All the analyses shown in this Section were done locally by using the dumped raw data extracted from the tfRecord files as shown in the Previous section. All the local processing is done in the [local_processing.py](local_processing.py).
 #### Boundingbox check
-In `check_bbox` the Coordinates of every Boundingbox are checked on whether they are within a range of 0.0 - 1.0. There is no problem with the BBox Coordinates as can be seen by the output:
+In `check_bbox()` the Coordinates of every Boundingbox is checked on whether they are within a range of 0.0 - 1.0. There is no problem with the BBox Coordinates as can be seen by the output:
 ```
 Maximum Value for bbox 1.0
 Minimum Value for bbox 0.0
 ```
 #### Analyze Cyclists
-As shown in the Class Distribution analysis, there is a imbalance in classes. Especially the cyclsit class is very underrepresented in the dataset. To know a exact percentage of the proportion of each class I calculated the overall percentage per Class in `analyse_cyclists`, I also analysed which tfRecord holds the cyclist class und how much of them. Depending on which cross-validation method is used later on, this could become handy.
+As shown in the Class Distribution analysis, there is an imbalance in classes. Especially the cyclsit class is very underrepresented in the dataset. To know a exact percentage of the proportion of each class I calculated the overall percentage per Class in `analyse_cyclists()`, I also analysed which tfRecord file holds the cyclist class und how much of them.
 ```
 [(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]
 ('segment-10023947602400723454_1120_000_1140_000_with_camera_labels_10.tfrecord', 2)
@@ -188,9 +188,9 @@ As shown in the Class Distribution analysis, there is a imbalance in classes. Es
 ('segment-10107710434105775874_760_000_780_000_with_camera_labels_190.tfrecord', 10)
 ('segment-10107710434105775874_760_000_780_000_with_camera_labels_70.tfrecord', 5)
 ```
-As can bee seen by the first line of the output `[(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]` there are only 0.61% of cyclists, 23.08% pedestrians and 76.30% Vehicles. The result of the analysis confirms the imbalance, which we already saw in the Classdistribution analysis. The rest of the output shows how many recordings of a cyclists are within one tfRecord-file, the last line for exmaple shows that there are 5 occurences of cyclist int `segment-10107710434105775874_760_000_780_000_with_camera_labels_70.tfrecord`.
+As can bee seen by the first line of the output `[(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]` there are only 0.61% of cyclists, 23.08% pedestrians and 76.30% Vehicles. The result of the analysis confirms the imbalance, which we already saw in the Class distribution analysis. The rest of the output shows how many recordings of a cyclists are within one tfRecord file, the last line for exmaple shows that there are 5 occurences of cyclist int `segment-10107710434105775874_760_000_780_000_with_camera_labels_70.tfrecord`.
 #### Boundingbox Size
-The Pictures of the Dataset were heavily resized and distorted. Along the pictures, the Boundingboxes got resized as well and therefore Boxes which were small in the first got even smaller. The get a good Impression of the Size distribution I created a Histogram which shows the distribution of Box sizes (squarepixels). The three Histograms are from the same data, only plotted with different ranges.
+The Images of the Dataset were heavily resized and distorted. Along the pictures, the Boundingboxes got resized as well and therefore Boxes which were small in the first place got even smaller. The get a good Impression of the Size distribution I created a Histogram which shows the distribution of Box sizes (squarepixels). The three Histograms are from the same data, only plotted with different ranges.
 
 <p align="center" width="100%">
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/bbox_size_histo.png"> 
@@ -247,7 +247,7 @@ I also noticed that when I delete files, e. g. training data over the "desktop" 
 sudo apt install trash-cli
 trash-empty
 ```
-All the shell-commands can be found in [commands.sh](commands.sh).
+All the shell commands can be found in [commands.sh](commands.sh).
 
 ### Create Splits
 First we have to create splits, I did choose a ratio of 80% Training and 20% validation data (this is a common ratio as learned in class). I do not create a test-split because these are already given. I do create symbolic links of the data to save space. The code for creating splits can be found in [create_splits.py](create_splits.py):
@@ -370,7 +370,7 @@ I found 9GB to be sufficient for the training-loop and leave the rest for evalua
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/84fbcee0777da993a0db850d347a695245290749/visualization/traing_and_val/exp1_run_3.PNG">
 </p>
 
-This yields to a very good result, the training- and evaluation loss are bove converging very fast to a Value of 0.5. We can also See that as expected in the model performance better at large objects rather than small ones:
+This yields to a very good result, the training- and evaluation loss are bove converging very fast to a Value of 0.5. We can also See that as expected, the model performs better at large objects rather than small ones:
 
 ```
  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.170
@@ -386,7 +386,7 @@ This yields to a very good result, the training- and evaluation loss are bove co
  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.598
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.583
 ```
-The Picture bellow is taken from the TensorBoard and shows on the Prediction on the left and the ground truth to the right. We can see that the model struggles to detect smaller objects. As mentioned in the EDA Section, this is a weak point with this model.
+The Picture bellow is taken from the TensorBoard and shows the Prediction on the left and the Ground truth to the right. We can see that the model struggles to detect smaller objects. As mentioned in the EDA Section, this is a weak point with this model.
 
 <p align="center" width="100%">
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/84fbcee0777da993a0db850d347a695245290749/visualization/traing_and_val/side_by_side1.png">
