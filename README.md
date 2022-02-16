@@ -314,7 +314,7 @@ if __name__ == "__main__":
     logger.info('Creating splits...')
     split(args.data_dir)
 ```
-## Refference Run
+### Refference Run
 The first run gives a refference to compare to. I generate a `pipeline_new.config` by executing the `edit_config.py` with the correspoding directorys:
 ```shell
 python edit_config.py --train_dir /home/workspace/data/waymo/train/ --eval_dir /home/workspace/data/waymo/val/ --batch_size 2 --checkpoint /home/workspace/experiments/pretrained_model/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8/checkpoint/ckpt-0 --label_map /home/workspace/experiments/label_map.pbtxt
@@ -337,5 +337,28 @@ warmup_learning_rate: 0.0013333     # previuos 0.0133
 <p align="center" width="100%">
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/2f27f3f71568962f4d44134f9645997be5280634/visualization/traing_and_val/reff_run_2_adjusted_lr.png"> 
 </p>
-With 
-With the adjusted learningrate th total-loss is decreasing much faster, after 1k Steps its already at 0.8 wereas the previous run was at somewhere around 5.
+
+With the adjusted learningrate the total-loss is decreasing much faster, after 1k Steps its already at 0.8 wereas the previous run was at somewhere around 5. With the adjusted Parameters i did a run with evluation. There is a "bump" in the data, this is due to en iterruption of the evaluation (stopping and resuming it), later graphs wont have this bump. 
+
+<p align="center" width="100%">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/16240ee5a5a024c830485e2b3f74ea81a65502dd/visualization/traing_and_val/reff_run_3_1.png">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/16240ee5a5a024c830485e2b3f74ea81a65502dd/visualization/traing_and_val/reff_run_3_2.png">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/16240ee5a5a024c830485e2b3f74ea81a65502dd/visualization/traing_and_val/reff_run_3_3.png">
+</p>
+
+### Experiment 1
+While doing the Refferencerun i noticed that the train-loop is using up almost all GPU memory (check with `nvidia-smi` in terminal), this can lead to not having enough memory for running the evaluation-loop simultaneously. TensorFlow gives us an option to limit how much GPU memory is used ([TensorFlow Guide](https://www.tensorflow.org/guide/gpu#limiting_gpu_memory_growth)). As suggested in the Guide i added the following code to the `model_main_tf2_py`:
+```Python
+gpus = tf.config.list_physical_devices('GPU')
+if gpus:
+  # Restrict TensorFlow to only allocate 1GB of memory on the first GPU
+  try:
+    tf.config.set_logical_device_configuration(
+        gpus[0],
+        [tf.config.LogicalDeviceConfiguration(memory_limit=9000)])
+    logical_gpus = tf.config.list_logical_devices('GPU')
+    print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
+  except RuntimeError as e:
+    # Virtual devices must be set before GPUs have been initialized
+    print(e)
+```
