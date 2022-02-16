@@ -247,7 +247,7 @@ I also noticed that when I delete files, e. g. training data over the "desktop" 
 sudo apt install trash-cli
 trash-empty
 ```
-All the shell commands can be found in [commands.sh](commands.sh).
+All the shell commands can be found in [commands.sh](commands.sh). All the pipeline configs can be found in [/experiments/pipeline_configs/](https://github.com/zorian-f/nd013-c1-vision-solution/tree/main/experiments/pipeline_configs).
 
 ### Create Splits
 First we have to create splits, I did choose a ratio of 80% Training and 20% validation data (this is a common ratio as learned in class). I do not create a test-split because these are already given. I do create symbolic links of the data to save space. The code for creating splits can be found in [create_splits.py](create_splits.py):
