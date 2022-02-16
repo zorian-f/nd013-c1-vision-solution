@@ -392,3 +392,5 @@ The Picture bellow is taken from the TensorBoard and shows on the Prediction on 
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/84fbcee0777da993a0db850d347a695245290749/visualization/traing_and_val/side_by_side1.png">
 </p>
 
+### Experiment 2
+For this experiment i use augmentation to try improve the result, to visualize the used methods i use the [Explore_augmentations.ipynb](Explore augmentations.ipynb). As the [SSD Paper](https://arxiv.org/pdf/1512.02325.pdf) suggests 
