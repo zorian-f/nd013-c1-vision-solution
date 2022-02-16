@@ -351,7 +351,7 @@ While doing the Refferencerun i noticed that the train-loop is using up almost a
 ```Python
 gpus = tf.config.list_physical_devices('GPU')
 if gpus:
-  # Restrict TensorFlow to only allocate 1GB of memory on the first GPU
+  # Restrict TensorFlow to only allocate 9GB of memory on the first GPU
   try:
     tf.config.set_logical_device_configuration(
         gpus[0],
@@ -362,3 +362,33 @@ if gpus:
     # Virtual devices must be set before GPUs have been initialized
     print(e)
 ```
+I found 9GB to be sufficient for the training-loop and leave the rest for evaluation. The modded code can be found in [model_main_tf2_mod.py](experiments/model_main_tf2_mod.py). In this experiment, the only Parameter i change was `batch_size: 5`:
+
+<p align="center" width="100%">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/84fbcee0777da993a0db850d347a695245290749/visualization/traing_and_val/exp1_run_1.PNG">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/84fbcee0777da993a0db850d347a695245290749/visualization/traing_and_val/exp1_run_2.PNG">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/84fbcee0777da993a0db850d347a695245290749/visualization/traing_and_val/exp1_run_3.PNG">
+</p>
+
+This yields to a very good result, the traning- and evluationloss are bove converging very fast to a Value of 0.5. We can also See that as aspected in the model perfomance better at large objects rather then small ones:
+
+```
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.170
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.339
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.148
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.074
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.519
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.562
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.046
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.176
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.245
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.159
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.598
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.583
+```
+The Picture bellow is taken from the TensorBoard and shows on the Prediction on the left and the ground truth to the right. We can see that the model struggles to detect smaller objects. As metioned in the EDA Section, this is a weakpoint with this model.
+
+<p align="center" width="100%">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/84fbcee0777da993a0db850d347a695245290749/visualization/traing_and_val/side_by_side1.png">
+</p>
+
