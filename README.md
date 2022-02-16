@@ -393,4 +393,9 @@ The Picture bellow is taken from the TensorBoard and shows on the Prediction on 
 </p>
 
 ### Experiment 2
-For this experiment i use augmentation to try improve the result, to visualize the used methods i use the [Explore_augmentations.ipynb](Explore augmentations.ipynb). As the [SSD Paper](https://arxiv.org/pdf/1512.02325.pdf) suggests 
+For this experiment i use augmentation to try improve the results, to visualize the used methods i use the [Jupyter Notebook](https://github.com/zorian-f/nd013-c1-vision-solution/blob/3d606565d282bfb3017939463f6745b0db87837e/Explore%20augmentations.ipynb). As the [SSD Paper](https://arxiv.org/pdf/1512.02325.pdf) suggests, random cropping should improve the performance for smaller objects. In the EDA we also saw that there are nighttime recordings, so i did also add a brightness adjusting method. There are several built-in augmentation methos that come with the TensorFlow Object Detection API the, [here](https://github.com/tensorflow/models/blob/master/research/object_detection/protos/preprocessor.proto) is a full list. I did choose to use the following methods:
+'''Python
+random_adjust_brightness
+ssd_random_crop
+random_vertical_flip
+'''
