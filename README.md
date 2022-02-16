@@ -399,3 +399,25 @@ random_adjust_brightness
 ssd_random_crop
 random_vertical_flip
 '''
+The augmentation did not change the Result:
+
+<p align="center" width="100%">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/e76fe0c7c96b2bf8c4bffed5ce65869e8b3f12e5/visualization/traing_and_val/exp2_run_1.PNG">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/e76fe0c7c96b2bf8c4bffed5ce65869e8b3f12e5/visualization/traing_and_val/exp2_run_2.PNG">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/e76fe0c7c96b2bf8c4bffed5ce65869e8b3f12e5/visualization/traing_and_val/exp2_run_3.PNG">
+</p>
+
+```
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.166
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.326
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.145
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.068
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.526
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.540
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.048
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.172
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.236
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.151
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.596
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.567
+```
