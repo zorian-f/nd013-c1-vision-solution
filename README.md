@@ -544,6 +544,8 @@ I used the model from my last experiment to create these inference videos:
 
 <p align="center" width="100%">
     <img width="100%" src="visualization/animation.gif">
+    <img width="100%" src="visualization/animation2.gif">
+    <img width="100%" src="visualization/animation3.gif">
 </p>
 
 # Recap
