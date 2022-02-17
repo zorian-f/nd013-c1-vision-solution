@@ -514,3 +514,26 @@ This gives better results but still not as good as with the momentum optimizer:
  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.210
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.352
 ```
+### Experiment 4
+For the last experiment I wanted to rerun the second experiment to see if i can get better results, this time i let it run for 3500 steps.
+
+<p align="center" width="100%">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/ff4d2042bd4473860fa590c85a8f9b69ec55e40f/visualization/traing_and_val/exp4_run_1.PNG">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/ff4d2042bd4473860fa590c85a8f9b69ec55e40f/visualization/traing_and_val/exp4_run_2.PNG">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/ff4d2042bd4473860fa590c85a8f9b69ec55e40f/visualization/traing_and_val/exp4_run_3.PNG">
+</p>
+
+```
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.158
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.319
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.135
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.064
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.508
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.546
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.046
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.166
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.229
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.143
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.588
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.562
+```
