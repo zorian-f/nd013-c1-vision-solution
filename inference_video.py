@@ -82,20 +82,27 @@ def main(labelmap_path, model_path, tf_record_path, config_path, output_path):
                 min_score_thresh=.30,
                 agnostic_mode=False)
         images.append(image_np_with_detections)
-
+        
+    # i calculate the mean images between every two images to smooth the animation
+    images2 = []
+    for idx, im in enumerate(images):
+        images2.append(images[idx])
+        if idx+2 <= len(images):
+            images2.append((images[idx].astype(float)+images[idx+1].astype(float))/2)
+            
     # now we can create the animation
     f = plt.figure()
     f.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=None, hspace=None)
     ax = plt.subplot(111)
     ax.axis('off')
-    im_obj = ax.imshow(images[0])
+    im_obj = ax.imshow(images2[0])
 
     def animate(idx):
         image = images[idx]
         im_obj.set_data(image)
 
-    anim = animation.FuncAnimation(f, animate, frames=len(images))
-    anim.save(output_path, fps=5, dpi=300)
+    anim = animation.FuncAnimation(f, animate, frames=len(images2))
+    anim.save(output_path, fps=10, dpi=300)
 
 
 if __name__ == "__main__":
