@@ -88,14 +88,14 @@ def main(labelmap_path, model_path, tf_record_path, config_path, output_path):
     f.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=None, hspace=None)
     ax = plt.subplot(111)
     ax.axis('off')
-    im_obj = ax.imshow(images2[0])
+    im_obj = ax.imshow(images[0])
 
     def animate(idx):
         image = images[idx]
         im_obj.set_data(image)
 
-    anim = animation.FuncAnimation(f, animate, frames=len(images2))
-    anim.save(output_path, fps=10, dpi=300)
+    anim = animation.FuncAnimation(f, animate, frames=len(images))
+    anim.save(output_path, fps=10, dpi=100)
 
 
 if __name__ == "__main__":
