@@ -370,7 +370,7 @@ I found 9GB to be sufficient for the training-loop and leave the rest for evalua
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/84fbcee0777da993a0db850d347a695245290749/visualization/traing_and_val/exp1_run_3.PNG">
 </p>
 
-This yields to a very good result, the training- and evaluation loss are bove converging very fast to a Value of 0.5. We can also See that as expected, the model performs better at large objects rather than small ones:
+This yields to a very good result, the training- and evaluation loss are bove converging very fast to a Value of 0.5. Also the distance between the training- and validation loss is small. We can also See that as expected, the model performs better at large objects rather than small ones:
 
 ```
  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.170
@@ -420,4 +420,56 @@ The augmentation did not change the Result:
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.151
  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.596
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.567
+```
+### Experiment 3
+In this Experiment I switched the momentum optimizer with adam. I did so by adding the following lines to my `pipeline_new.config`:
+```
+optimizer {
+    # momentum_optimizer {
+    adam_optimizer: {
+      learning_rate: {
+        manual_step_learning_rate {
+          initial_learning_rate: .0001
+          schedule {
+            step: 500
+            learning_rate: .0002
+          }
+          schedule {
+            step: 1000
+            learning_rate: .00004
+          }
+          schedule {
+            step: 1500
+            learning_rate: .00002
+          }
+        }
+      }
+      # momentum_optimizer_value: 0.9
+    }
+    use_moving_average: false
+  }
+```
+I tried using a sheduler and after 160 Steps I stopped because there was no change in the loss:
+<p align="center" width="100%">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/abad7653f04958f98f23ee1e5105f6cbacd9c806/visualization/traing_and_val/exp3_run_1.PNG">
+</p>
+I then changed the sheduler to reduce learnin rate early:
+```
+          schedule {
+            step: 500
+            learning_rate: .0002
+          }
+          schedule {
+            step: 1000
+            learning_rate: .00004
+          }
+          schedule {
+            step: 1500
+            learning_rate: .00002
+          }
+```
+I also changed the `model_main_tf2.py` to print out checkpoints more often:
+```Python
+flags.DEFINE_integer(
+    'checkpoint_every_n', 100, 'Integer defining how often we checkpoint.')
 ```
