@@ -422,7 +422,7 @@ The augmentation did not change the Result:
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.567
 ```
 ### Experiment 3
-In this Experiment I switched the momentum optimizer with adam. I did so by adding the following lines to my `pipeline_new.config`:
+In this Experiment I switched the momentum optimizer with adam (optimizer options can be found in the [optimizer.proto](https://github.com/tensorflow/models/blob/master/research/object_detection/protos/optimizer.proto). I did so by adding the following lines to my `pipeline_new.config`:
 ```
 optimizer {
     # momentum_optimizer {
