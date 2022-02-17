@@ -537,7 +537,7 @@ For the last experiment I wanted to rerun the second experiment to see if i can 
  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.588
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.562
 ```
-This run did not improve over experiment 2.
+This run did not improve over experiment 2. We Still see that the model performs best with large objects.
 
 ### Inference Video
 I used the model from my last experiment to create these inference videos:
@@ -547,7 +547,3 @@ I used the model from my last experiment to create these inference videos:
     <img width="100%" src="visualization/animation2.gif">
     <img width="100%" src="visualization/animation3.gif">
 </p>
-
-# Recap
-Given the data provided im
-
