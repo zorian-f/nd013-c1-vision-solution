@@ -82,13 +82,6 @@ def main(labelmap_path, model_path, tf_record_path, config_path, output_path):
                 min_score_thresh=.30,
                 agnostic_mode=False)
         images.append(image_np_with_detections)
-        
-    # i calculate the mean images between every two images to smooth the animation
-    images2 = []
-    for idx, im in enumerate(images):
-        images2.append(images[idx])
-        if idx+2 <= len(images):
-            images2.append((images[idx].astype(float)+images[idx+1].astype(float))/2)
             
     # now we can create the animation
     f = plt.figure()
