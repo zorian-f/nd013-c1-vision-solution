@@ -450,9 +450,11 @@ optimizer {
   }
 ```
 I tried using a sheduler and after 160 Steps I stopped because there was no change in the loss:
+
 <p align="center" width="100%">
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/abad7653f04958f98f23ee1e5105f6cbacd9c806/visualization/traing_and_val/exp3_run_1.PNG">
 </p>
+
 I then changed the sheduler to reduce learnin rate early:
 ```
           schedule {
@@ -472,4 +474,43 @@ I also changed the `model_main_tf2.py` to print out checkpoints more often:
 ```Python
 flags.DEFINE_integer(
     'checkpoint_every_n', 100, 'Integer defining how often we checkpoint.')
+```
+This gives me the following Result:
+
+<p align="center" width="100%">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/abad7653f04958f98f23ee1e5105f6cbacd9c806/visualization/traing_and_val/exp3_run_2.PNG">
+</p>
+
+The delta bewteen training- and validationloss is big, this gives not a good result. The training converges very quickly maybe I am hitting a local minimum very early. I next tried to use the the cosine decay as I did with the momentum optimizer:
+```
+      learning_rate: {
+        cosine_decay_learning_rate {
+          learning_rate_base: 0.002
+          total_steps: 600
+          warmup_learning_rate: 0.0013333
+          warmup_steps: 50
+        }
+      }
+```
+This gives better results but still not as good as with the momentum optimizer:
+
+<p align="center" width="100%">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/c86541d444b859ec0bc2df1fb442e4513da907fa/visualization/traing_and_val/exp3_run_3_1.PNG">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/c86541d444b859ec0bc2df1fb442e4513da907fa/visualization/traing_and_val/exp3_run_3_2.PNG">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/c86541d444b859ec0bc2df1fb442e4513da907fa/visualization/traing_and_val/exp3_run_3_3.PNG">
+</p>
+
+```
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.027
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.072
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.016
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.007
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.093
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.164
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.012
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.040
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.067
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.023
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.210
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.352
 ```
