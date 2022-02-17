@@ -537,3 +537,9 @@ For the last experiment I wanted to rerun the second experiment to see if i can 
  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.588
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.562
 ```
+This run did not improve over experiment 2.
+
+### Inference Video
+I used the model from my last experiment to create the inference video
+
+![Alt Text](visualization/animation.gif)
