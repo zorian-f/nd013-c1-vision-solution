@@ -540,9 +540,12 @@ For the last experiment I wanted to rerun the second experiment to see if i can 
 This run did not improve over experiment 2.
 
 ### Inference Video
-I used the model from my last experiment to create the inference video:
+I used the model from my last experiment to create these inference videos:
 
 <p align="center" width="100%">
-    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/5121bdb4b5ed8e1a78fc7505cd88fe10c054ac7d/visualization/animation.gif">
+    <img width="100%" src="visualization/animation.gif">
 </p>
+
+# Recap
+Given the data provided im
 
