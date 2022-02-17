@@ -495,9 +495,9 @@ The delta bewteen training- and validationloss is big, this gives not a good res
 This gives better results but still not as good as with the momentum optimizer:
 
 <p align="center" width="100%">
-    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/c86541d444b859ec0bc2df1fb442e4513da907fa/visualization/traing_and_val/exp3_run_3_1.PNG">
-    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/c86541d444b859ec0bc2df1fb442e4513da907fa/visualization/traing_and_val/exp3_run_3_2.PNG">
-    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/c86541d444b859ec0bc2df1fb442e4513da907fa/visualization/traing_and_val/exp3_run_3_3.PNG">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/e53051ed886f0d5915d98e7882111e50ec1b165c/visualization/traing_and_val/exp3_run_3_1.PNG">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/e53051ed886f0d5915d98e7882111e50ec1b165c/visualization/traing_and_val/exp3_run_3_2.PNG">
+    <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/e53051ed886f0d5915d98e7882111e50ec1b165c/visualization/traing_and_val/exp3_run_3_3.PNG">
 </p>
 
 ```
