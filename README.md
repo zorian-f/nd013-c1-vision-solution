@@ -190,7 +190,7 @@ As shown in the Class Distribution analysis, there is an imbalance in classes. E
 ```
 As can bee seen by the first line of the output `[(1, 76.3081267096091, 17296), (2, 23.07861995941057, 5231), (4, 0.613253330980323, 139)]` there are only 0.61% of cyclists, 23.08% pedestrians and 76.30% Vehicles. The result of the analysis confirms the imbalance, which we already saw in the Class distribution analysis. The rest of the output shows how many recordings of a cyclists are within one tfRecord file, the last line for exmaple shows that there are 5 occurences of cyclist int `segment-10107710434105775874_760_000_780_000_with_camera_labels_70.tfrecord`.
 #### Boundingbox Size
-The Images of the Dataset were heavily resized and distorted. Along the pictures, the Boundingboxes got resized as well and therefore Boxes which were small in the first place got even smaller. The get a good Impression of the Size distribution I created a Histogram which shows the distribution of Box sizes (squarepixels). The three Histograms are from the same data, only plotted with different ranges.
+The Images of the Dataset were heavily resized and distorted. Along the pictures, the Boundingboxes got resized as well and therefore Boxes which were small in the first place got even smaller. The get a good Impression of the Size distribution I created a Histogram with `plot_bbox_histogramm()` which shows the distribution of Box sizes (squarepixels). The three Histograms are from the same data, only plotted with different ranges.
 
 <p align="center" width="100%">
     <img width="100%" src="https://github.com/zorian-f/nd013-c1-vision-solution/blob/main/visualization/bbox_size_histo.png"> 
